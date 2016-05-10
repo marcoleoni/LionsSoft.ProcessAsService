@@ -63,6 +63,10 @@ namespace LionsSoft.ProcessAsService
         {
             if (process != null)
                 process.Kill();
+            if (logger != null)
+            {
+                logger.Info("ProcessAsService Closing");
+            }
             return true;
         }
     }
