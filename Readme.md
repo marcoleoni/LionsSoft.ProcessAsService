@@ -21,3 +21,8 @@ Customize as your need.
 Start LionsSoft.ProcessAsService.exe, make your test and finally start LionsSoft.ProcessAsService.exe with "install" argument.
 See TopShelf documentation for more command line arguments.
 
+
+##Thanks to
+* http://topshelf-project.com/
+* http://nlog-project.org/
+* http://www.west-wind.com/Westwind.ApplicationConfiguration/
