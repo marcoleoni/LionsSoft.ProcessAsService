@@ -6,6 +6,7 @@ using Westwind.Utilities.Configuration;
 
 namespace LionsSoft.ProcessAsService
 {
+    
     class Program
     {
         static void Main(string[] args)
@@ -23,12 +24,27 @@ namespace LionsSoft.ProcessAsService
         }
     }
 
+    /// <summary>
+    /// Service class implementing Topshelf ServiceControl interface
+    /// </summary>
     public class SrvStart : ServiceControl
     {
 
+        /// <summary>
+        /// Reference to process
+        /// </summary>
         Process process = null;
+
+        /// <summary>
+        /// The logger instance
+        /// </summary>
         Logger logger;
 
+        /// <summary>
+        /// Start the service
+        /// </summary>
+        /// <param name="hostControl">passed by topshelf</param>
+        /// <returns>true if service started correctly</returns>
         public bool Start(HostControl hostControl)
         {
             
@@ -59,6 +75,11 @@ namespace LionsSoft.ProcessAsService
             }
         }
 
+        /// <summary>
+        /// Stop the service
+        /// </summary>
+        /// <param name="hostControl">PAssed by topshelf</param>
+        /// <returns>true if the service stopped correctly</returns>
         public bool Stop(HostControl hostControl)
         {
             if (process != null)
@@ -71,12 +92,28 @@ namespace LionsSoft.ProcessAsService
         }
     }
 
+    /// <summary>
+    /// Configuration class implementing westwind AppConfiguration class
+    /// </summary>
     public class Conf : AppConfiguration
     {
         private string config_file_name = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"LionsSoft\ProcessAsService.config");
+
+        /// <summary>
+        /// File name with full path of the file to service
+        /// </summary>
         public string FileToService { get; set; }
+
+        /// <summary>
+        /// Working directory
+        /// </summary>
         public string StartDirectory { get; set; }
+
+        /// <summary>
+        /// Optional arguments 
+        /// </summary>
         public string Arguments { get; set; }
+
         protected override IConfigurationProvider OnCreateDefaultProvider(string sectionName, object configData)
         {
             var provider = new XmlFileConfigurationProvider<Conf>()

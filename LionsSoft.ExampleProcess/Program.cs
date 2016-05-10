@@ -10,8 +10,7 @@ namespace LionsSoft.ExampleProcess
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Ciao secco sono partito");
-            File.AppendAllText(@"c:\programdata\LionsSoft\ExampleProcess.txt", "Avviato");
+            File.AppendAllText(@"%programdata%\LionsSoft\ExampleProcess.txt", "Avviato\r\n");
             Console.ReadKey();
         }
     }
