@@ -1,10 +1,6 @@
 ﻿using NLog;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
 using Topshelf;
 using Westwind.Utilities.Configuration;
 
@@ -32,7 +28,7 @@ namespace LionsSoft.ProcessAsService
 
         Process process = null;
         Logger logger;
-        StreamReader outputReader;
+
         public bool Start(HostControl hostControl)
         {
             
@@ -49,12 +45,10 @@ namespace LionsSoft.ProcessAsService
                 psi.UseShellExecute = false;
                 psi.LoadUserProfile = false;
                 psi.Arguments = conf.Arguments;
-                psi.RedirectStandardOutput = true;
                 psi.ErrorDialog = false;
                 process = new Process();
                 process.StartInfo = psi;
                 var started = process.Start();
-                outputReader = process.StandardOutput;
                 logger.Info("Starting Process " + conf.FileToService);
                 return started;
             }
@@ -67,10 +61,6 @@ namespace LionsSoft.ProcessAsService
 
         public bool Stop(HostControl hostControl)
         {
-            if (outputReader != null)
-            {
-                logger.Info(outputReader.ReadToEnd());
-            }
             if (process != null)
                 process.Kill();
             return true;
